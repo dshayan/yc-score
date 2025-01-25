@@ -1,0 +1,16 @@
+# Environment and configuration
+.env
+.streamlit/secrets.toml
+.devcontainer/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+
+# Virtual Environment
+venv/
+
+# Data directories
+data/
