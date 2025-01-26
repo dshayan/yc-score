@@ -111,11 +111,11 @@ For each section, provide:
 
 Score: **X/100**
 
-✅ Criteria met by the response separated by ;
+✅ Criteria met by the response, separated by ';', in a single line
 
-❌ Criteria not met or needs improvement separated by ;
+❌ Criteria not met or needs improvement by the response, separated by ';', in a single line
 
-💡 Specific suggestions for improvement separated by ;
+💡 Specific suggestions for improvement, separated by ';', in a single line
 
 IMPORTANT: Do not write any introduction or explanation and follow the format explicitly.
 
