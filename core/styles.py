@@ -10,8 +10,14 @@ h1 {
     font-weight: 700 !important;
 }
 
+.app-subtitle {
+    font-size: 1rem !important;
+    color: #666666 !important;
+    margin-bottom: 2rem !important;
+}
+
 h2 {
-    font-size: 1.5rem !important;
+    font-size: 1.6rem !important;
     font-weight: 700 !important;
 }
 
@@ -23,12 +29,13 @@ h3 {
 /* Paragraph style */
 p {
     font-size: 1rem !important;
-    font-weight: 600 !important;
-    line-height: 1.6 !important;
 }
 
-.stMarkdown {
-    margin-bottom: 1rem;
+/* Adjust block container width */
+.block-container {
+    padding-left: 4rem !important;
+    padding-right: 4rem !important;
+    max-width: 72rem !important;
 }
 
 /* Remove form borders and padding */
@@ -40,9 +47,58 @@ div[data-testid="stForm"] {
     box-shadow: none !important;
 }
 
-.feedback-column {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    border-radius: 0.5rem;
+/* Input field spacing */
+div.stTextInput, 
+div.stSelectbox, 
+div.stTextArea, 
+div.stFileUploader {
+    margin-bottom: 1.6rem !important;
 }
+
+/* Remove resize handle from text areas */
+textarea {
+    overflow: hidden !important;
+}
+
+/* AI Feedback column spacing */
+.feedback-column {
+    margin-top: 1rem !important;
+}
+
+/* Overall score container */
+.overall-score-container {
+    padding: 1rem;
+    background: linear-gradient(to right, #f25f4c, #f9bc60) !important;  /* Change from left orange to right red */
+    border-radius: 8px !important;
+    margin-right: -1rem;
+    margin-left: -1rem;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.overall-score-text {
+    margin: 0;
+    color: #ffffff !important;
+}
+
+.score-value {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 4px;
+
+}
+
+/* Button styles */
+.stFormSubmitButton > button {
+    background-color: #ff8e3c !important;
+    border-color: #none; !important;
+    border-style: none;
+    color: white !important;
+}
+
+.stFormSubmitButton > button:hover {
+    background-color: #f9bc60 !important;
+    border-color: none;
+}
+
 """

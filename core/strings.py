@@ -1,6 +1,7 @@
 # Form Titles and Headers
 APP_LOGO = "🈸"
-APP_TITLE = "YC Application Evaluator"
+APP_TITLE = "YC Score"
+APP_SUBTITLE = "Preview feedback on your YC application 👀"
 
 # Section Headers
 FOUNDERS_HEADER = "Founders"
@@ -49,10 +50,19 @@ CATEGORY_OPTIONS = ["", "B2B", "B2C", "Marketplace", "Hardware", "AI/ML", "Devel
 
 # Messages
 AI_FEEDBACK_HEADER = "### AI Feedback"
-AI_REVIEW_HEADER = "**Evaluation**"
 COMPANY_NAME_REQUIRED = "Company name is required."
 COMPANY_DESCRIPTION_REQUIRED = "Company description is required."
 SUCCESS_MESSAGE = "Application submitted successfully! Saved to {}"
+
+# Button Labels
+SUBMIT_BUTTON_LABEL = "Submit Application"
+
+# Score Labels
+OVERALL_SCORE_LABEL = "Overall Score: "
+
+# Score Labels
+OVERALL_SCORE_PREFIX = "Your application's overall score is "
+OVERALL_SCORE_SUFFIX = "."
 
 # File Writing
 FILE_HEADER = "# YC Application Submission\n\n"

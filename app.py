@@ -1,20 +1,24 @@
 import os
 from datetime import datetime
-import streamlit as st
 from anthropic import Anthropic
-from core.styles import *
+import streamlit as st
 from core.config import *
 from core.strings import *
+from core.styles import *
 
 st.set_page_config(
     page_title=APP_TITLE,
     page_icon=APP_LOGO,
 )
 
+# Apply custom CSS
+st.markdown(f'<style>{CSS}</style>', unsafe_allow_html=True)
+
 def process_ai_feedback(response_text):
-    """Parse AI feedback into sections"""
+    """Parse AI feedback into sections while preserving exact content"""
     sections = {
         FOUNDERS_HEADER: "",
+        FOUNDER_VIDEO_HEADER: "",
         COMPANY_HEADER: "",
         PROGRESS_HEADER: "",
         IDEA_HEADER: "",
@@ -22,39 +26,59 @@ def process_ai_feedback(response_text):
         CURIOUS_HEADER: ""
     }
     
+    lines = response_text.split('\n')
     current_section = None
-    current_text = []
+    section_content = []
     
-    for line in response_text.split('\n'):
-        # More flexible section matching
-        matched_section = None
-        for section in sections.keys():
-            if section.lower() in line.lower():
-                matched_section = section
-                break
-        
-        if matched_section:
-            if current_section:
-                sections[current_section] = '\n'.join(current_text).strip()
-            current_section = matched_section
-            current_text = []
-        elif current_section:
-            current_text.append(line)
+    for i, line in enumerate(lines):
+        if line.startswith('##'):
+            # Save previous section
+            if current_section and section_content:
+                sections[current_section] = '\n'.join(section_content)
+                section_content = []
+            
+            # Find the current section
+            for section in sections.keys():
+                if section.lower() in line.lower():
+                    current_section = section
+                    break
+        elif current_section and i < len(lines):
+            section_content.append(line)
     
-    if current_section:
-        sections[current_section] = '\n'.join(current_text).strip()
+    # Save the last section
+    if current_section and section_content:
+        sections[current_section] = '\n'.join(section_content)
     
     return sections
 
+def extract_overall_score(response_text):
+    """Extract the overall score from the AI response"""
+    for line in response_text.split('\n'):
+        if line.startswith('Overall Score'):
+            # Extract number between ** **
+            score = line.split('**')[1].strip('/')
+            return score
+    return None
+
 def main():
+
+    if 'overall_score' not in st.session_state:
+        st.session_state.overall_score = None    
+    
     if not os.path.exists(DATA_DIRECTORY):
         os.makedirs(DATA_DIRECTORY)
-
-    st.title(APP_TITLE)
-
-    # Apply custom CSS
-    st.markdown(f'<style>{CSS}</style>', unsafe_allow_html=True)
     
+    st.title(APP_LOGO)
+    st.title(APP_TITLE)
+    st.markdown(f'<p class="app-subtitle">{APP_SUBTITLE}</p>', unsafe_allow_html=True)
+
+    if st.session_state.overall_score:
+        st.markdown(f"""
+        <div class="overall-score-container">
+            <h2 class="overall-score-text">{OVERALL_SCORE_PREFIX}<span class="score-value">{st.session_state.overall_score}</span>{OVERALL_SCORE_SUFFIX}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+
     if 'ai_feedback' not in st.session_state:
         st.session_state.ai_feedback = None
         
@@ -62,22 +86,30 @@ def main():
         st.session_state.form_data = {}
 
     with st.form(FORM_NAME):
-        # 1. Founders Section
+        # Founders Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(FOUNDERS_HEADER)
             technical_work = st.text_area(TECHNICAL_WORK_LABEL)
             looking_for_cofounder = st.selectbox(COFOUNDER_LABEL, YES_NO_OPTIONS)
-            
-            # Founder Video as subsection
-            st.subheader(FOUNDER_VIDEO_HEADER)
+        with feedback_col:
+            if st.session_state.ai_feedback:
+                st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
+                st.markdown(st.session_state.ai_feedback[FOUNDERS_HEADER])
+                st.markdown('</div>', unsafe_allow_html=True)
+
+        # Founder Video Section
+        form_col, feedback_col = st.columns(COLUMN_RATIO)
+        with form_col:
+            st.header(FOUNDER_VIDEO_HEADER)
             founder_video = st.file_uploader(FOUNDER_VIDEO_LABEL, type=["mp4", "mov"])
         with feedback_col:
             if st.session_state.ai_feedback:
-                st.markdown(AI_REVIEW_HEADER)
-                st.markdown(st.session_state.ai_feedback[FOUNDERS_HEADER])
+                st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
+                st.markdown(st.session_state.ai_feedback[FOUNDER_VIDEO_HEADER])
+                st.markdown('</div>', unsafe_allow_html=True)
         
-        # 2. Company Section
+        # Company Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(COMPANY_HEADER)
@@ -98,10 +130,11 @@ def main():
             location_explanation = st.text_area(LOCATION_EXPLANATION_LABEL)
         with feedback_col:
             if st.session_state.ai_feedback:
-                st.markdown(AI_REVIEW_HEADER)
+                st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
                 st.markdown(st.session_state.ai_feedback[COMPANY_HEADER])
+                st.markdown('</div>', unsafe_allow_html=True)
         
-        # 3. Progress Section
+        # Progress Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(PROGRESS_HEADER)
@@ -114,10 +147,11 @@ def main():
             incubator = st.text_area(INCUBATOR_LABEL)
         with feedback_col:
             if st.session_state.ai_feedback:
-                st.markdown(AI_REVIEW_HEADER)
+                st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
                 st.markdown(st.session_state.ai_feedback[PROGRESS_HEADER])
+                st.markdown('</div>', unsafe_allow_html=True)
         
-        # 4. Idea Section
+        # Idea Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(IDEA_HEADER)
@@ -128,10 +162,11 @@ def main():
             other_ideas = st.text_area(OTHER_IDEAS_LABEL)
         with feedback_col:
             if st.session_state.ai_feedback:
-                st.markdown(AI_REVIEW_HEADER)
+                st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
                 st.markdown(st.session_state.ai_feedback[IDEA_HEADER])
+                st.markdown('</div>', unsafe_allow_html=True)
         
-        # 5. Equity Section
+        # Equity Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(EQUITY_HEADER)
@@ -140,10 +175,11 @@ def main():
             fundraising = st.selectbox(FUNDRAISING_LABEL, YES_NO_OPTIONS)
         with feedback_col:
             if st.session_state.ai_feedback:
-                st.markdown(AI_REVIEW_HEADER)
+                st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
                 st.markdown(st.session_state.ai_feedback[EQUITY_HEADER])
+                st.markdown('</div>', unsafe_allow_html=True)
         
-        # 6. Curious Section
+        # Curious Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(CURIOUS_HEADER)
@@ -151,11 +187,12 @@ def main():
             hear_about_yc = st.text_area(HEAR_ABOUT_YC_LABEL)
         with feedback_col:
             if st.session_state.ai_feedback:
-                st.markdown(AI_REVIEW_HEADER)
+                st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
                 st.markdown(st.session_state.ai_feedback[CURIOUS_HEADER])
+                st.markdown('</div>', unsafe_allow_html=True)
         
         # Submit button at the bottom of the form
-        submitted = st.form_submit_button("Submit Application")
+        submitted = st.form_submit_button(SUBMIT_BUTTON_LABEL, type="primary")
 
     if submitted:
         # Validate required fields
@@ -169,6 +206,9 @@ def main():
                 FOUNDERS_HEADER: [
                     {"question": TECHNICAL_WORK_LABEL, "answer": technical_work},
                     {"question": COFOUNDER_LABEL, "answer": looking_for_cofounder}
+                ],
+                FOUNDER_VIDEO_HEADER: [
+                    {"question": FOUNDER_VIDEO_LABEL, "answer": founder_video.name if founder_video else ""}
                 ],
                 COMPANY_HEADER: [
                     {"question": COMPANY_NAME_LABEL, "answer": company_name},
@@ -227,6 +267,9 @@ def main():
                 messages=[{"role": "user", "content": content}]
             )
             
+            # Extract and store overall score
+            st.session_state.overall_score = extract_overall_score(response.content[0].text)
+            
             # Process and store AI feedback
             st.session_state.ai_feedback = process_ai_feedback(response.content[0].text)
             
@@ -240,7 +283,7 @@ def main():
             
             # Show success message
             st.success(SUCCESS_MESSAGE.format(filename))
-            st.rerun()  # Rerun to show feedback
-
+            st.rerun()
+            
 if __name__ == "__main__":
     main()
