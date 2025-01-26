@@ -1,6 +1,3 @@
-
-
-````markdown
 # YC Score
 
 An application that provides instant AI feedback on Y Combinator application drafts.
@@ -16,19 +13,19 @@ An application that provides instant AI feedback on Y Combinator application dra
 ## Setup
 
 1. Install dependencies:
-````
 
+````
 pip install -r requirements.txt
 ````
 
 2. Set environment variables:
-````
 
+````
 ANTHROPIC_API_KEY=your_api_key
 ````
 
 3. Run the app:
-````
 
+````
 streamlit run app.py
 ````
