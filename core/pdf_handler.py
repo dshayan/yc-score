@@ -2,9 +2,10 @@ import os
 from anthropic import Anthropic
 from datetime import datetime
 import streamlit as st
+import PyPDF2
 from core.config import *
 from core.strings import *
-import PyPDF2
+from prompts.read_pdf_prompt import SYSTEM_PROMPT
 
 def save_pdf_file(pdf_file):
     """Save uploaded PDF to data directory and return the file path"""
@@ -21,7 +22,6 @@ def save_pdf_file(pdf_file):
 
 def get_ai_extraction(pdf_path):
     """Send PDF to Anthropic AI for data extraction"""
-    from prompts.read_pdf_prompt import PDF_SYSTEM_PROMPT
     
     # Extract text from PDF
     pdf_text = ""
@@ -36,7 +36,7 @@ def get_ai_extraction(pdf_path):
         model=CLAUDE_MODEL,
         max_tokens=MAX_TOKENS,
         temperature=MODEL_TEMPERATURE,
-        system=PDF_SYSTEM_PROMPT,
+        system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": pdf_text}]
     )
     
