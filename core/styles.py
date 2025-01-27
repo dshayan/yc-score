@@ -14,7 +14,7 @@ h1 {
 .app-subtitle {
     font-size: 1rem !important;
     color: #666666 !important;
-    margin-bottom: 2rem !important;
+    margin-bottom: 4rem !important;
 }
 
 h2 {
@@ -71,7 +71,7 @@ div.stFileUploader {
 
 .overall-score-container {
     padding: 1rem;
-    background: linear-gradient(to right, #f25f4c, #f9bc60) !important;  /* Change from left orange to right red */
+    background: linear-gradient(to right, #f25f4c, #f9bc60) !important;
     border-radius: 8px !important;
     margin-right: -1rem;
     margin-left: -1rem;
@@ -95,8 +95,9 @@ div.stFileUploader {
 
 .stFormSubmitButton > button {
     background-color: #ff8e3c !important;
-    border-style: none;
     color: white !important;
+    border-style: none;
+    border-radius: 4px !important;
 }
 
 .stFormSubmitButton > button:hover {
