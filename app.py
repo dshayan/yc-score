@@ -72,13 +72,6 @@ def main():
     st.title(APP_TITLE)
     st.markdown(f'<p class="app-subtitle">{APP_SUBTITLE}</p>', unsafe_allow_html=True)
 
-    if st.session_state.overall_score:
-        st.markdown(f"""
-        <div class="overall-score-container">
-            <h2 class="overall-score-text">{OVERALL_SCORE_PREFIX}<span class="score-value">{st.session_state.overall_score}</span>{OVERALL_SCORE_SUFFIX}</h2>
-        </div>
-        """, unsafe_allow_html=True)
-
     if 'ai_feedback' not in st.session_state:
         st.session_state.ai_feedback = None
         
@@ -125,6 +118,14 @@ def main():
     elif uploaded_pdf is None:
         st.session_state.pdf_processed = False
 
+    # Display overall score after PDF upload
+    if st.session_state.overall_score:
+        st.markdown(f"""
+        <div class="overall-score-container">
+            <h2 class="overall-score-text">{OVERALL_SCORE_PREFIX}<span class="score-value">{st.session_state.overall_score}</span>{OVERALL_SCORE_SUFFIX}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+        
     with st.form(FORM_NAME):
         # Founders Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
