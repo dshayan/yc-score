@@ -71,7 +71,7 @@ div.stFileUploader {
 
 .overall-score-container {
     padding: 1rem;
-    background: linear-gradient(to right, #f25f4c, #f9bc60) !important;
+    background: linear-gradient(to right, #f25f4c, #ff8e3c) !important;
     border-radius: 8px !important;
     margin-right: -1rem;
     margin-left: -1rem;
@@ -94,14 +94,14 @@ div.stFileUploader {
 /* Button styles */
 
 .stFormSubmitButton > button {
-    background-color: #ff8e3c !important;
+    background-color: #ff8906 !important;
     color: white !important;
     border-style: none;
     border-radius: 4px !important;
 }
 
 .stFormSubmitButton > button:hover {
-    background-color: #f9bc60 !important;
+    background-color: #ff8e3c !important;
 }
 
 """
