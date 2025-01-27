@@ -61,6 +61,96 @@ def extract_overall_score(response_text):
             return score
     return None
 
+def extract_section_scores(response_text):
+    """Extract scores for each section from AI feedback"""
+    section_scores = {}
+    lines = response_text.split('\n')
+    
+    # Define section name mappings (normalized to match both formats)
+    section_mappings = {
+        'founders': FOUNDERS_HEADER,
+        'founder video': FOUNDER_VIDEO_HEADER,
+        'company': COMPANY_HEADER,
+        'progress': PROGRESS_HEADER,
+        'idea': IDEA_HEADER,
+        'equity': EQUITY_HEADER,
+        'curious': CURIOUS_HEADER
+    }
+    
+    current_section = None
+    for i, line in enumerate(lines):
+        if line.startswith('## '):
+            # Find the current section
+            section_name = line.strip('# ').strip().lower()
+            for key, mapped_name in section_mappings.items():
+                if key in section_name:  # Using 'in' for partial matching
+                    current_section = mapped_name
+                    # Find the score line that follows this section header
+                    for next_line in lines[i:i+5]:  # Look at next few lines
+                        if next_line.startswith('Score: **'):
+                            try:
+                                # Extract score between ** ** and handle /100 format
+                                score_text = next_line.split('**')[1].strip()
+                                score = int(score_text.split('/')[0].strip())
+                                section_scores[current_section] = score
+                            except (IndexError, ValueError):
+                                continue
+                    break
+    
+    """# Debug print to verify scores
+    print("Extracted section scores:", section_scores)"""
+    
+    return section_scores
+
+def create_radar_chart(section_scores):
+    """Create a radar chart from section scores"""
+    import plotly.graph_objects as go
+    
+    # Include all sections from the evaluation criteria
+    relevant_sections = [
+        FOUNDERS_HEADER,          # 30% weight
+        FOUNDER_VIDEO_HEADER,     # 5% weight
+        COMPANY_HEADER,           # 35% weight
+        PROGRESS_HEADER,          # 15% weight
+        IDEA_HEADER,             # 18% weight
+        EQUITY_HEADER,           # 4% weight
+        CURIOUS_HEADER           # 1% weight
+    ]
+    
+    # Filter and order the scores
+    scores = [section_scores.get(section, 0) for section in relevant_sections]
+    
+    # Debug print to check scores
+    print("Section scores:", dict(zip(relevant_sections, scores)))
+    
+    fig = go.Figure(data=go.Scatterpolar(
+        r=scores,
+        theta=relevant_sections,
+        fill='toself',
+        fillcolor='rgba(255, 142, 60, 0.5)',
+        line=dict(color='#ff8906', width=2)
+    ))
+
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+                range=[0, 100],
+                showline=False,
+                tickfont=dict(size=10)
+            ),
+            angularaxis=dict(
+                tickfont=dict(size=12)
+            )
+        ),
+        showlegend=False,
+        margin=dict(l=32, r=32, t=32, b=32),
+        height=320,
+        paper_bgcolor='#fafafa'
+    )
+    
+    return fig
+
 def main():
     if 'overall_score' not in st.session_state:
         st.session_state.overall_score = None    
@@ -127,6 +217,12 @@ def main():
         </div>
         """, unsafe_allow_html=True)
 
+        # Display radar chart if available
+        if hasattr(st.session_state, 'radar_chart'):
+            st.markdown('<div class="radar-chart-container">', unsafe_allow_html=True)
+            st.plotly_chart(st.session_state.radar_chart, use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+    
     with st.form(FORM_NAME):
         # Founders Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
@@ -390,6 +486,11 @@ def main():
             # Extract and store overall score
             st.session_state.overall_score = extract_overall_score(response.content[0].text)
             
+            # Extract section scores and create radar chart
+            section_scores = extract_section_scores(response.content[0].text)
+            radar_chart = create_radar_chart(section_scores)
+            st.session_state.radar_chart = radar_chart
+
             # Process and store AI feedback
             st.session_state.ai_feedback = process_ai_feedback(response.content[0].text)
             

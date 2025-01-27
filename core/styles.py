@@ -13,7 +13,7 @@ h1 {
 
 .app-subtitle {
     font-size: 1rem !important;
-    color: #666666 !important;
+    color: #6F6E69 !important;
     margin-bottom: 4rem !important;
 }
 
@@ -71,17 +71,15 @@ div.stFileUploader {
 
 .overall-score-container {
     padding: 1rem;
-    background: linear-gradient(to right, #f25f4c, #ff8e3c) !important;
+    background: linear-gradient(to right, #F25F4C, #FF8E3C) !important;
     border-radius: 8px !important;
-    margin-right: -1rem;
-    margin-left: -1rem;
     margin-top: 1rem !important;
     margin-bottom: 1rem !important;
 }
 
 .overall-score-text {
     margin: 0;
-    color: #ffffff !important;
+    color: #FFFFFF !important;
 }
 
 .score-value {
@@ -94,14 +92,24 @@ div.stFileUploader {
 /* Button styles */
 
 .stFormSubmitButton > button {
-    background-color: #ff8906 !important;
+    background-color: #FF8906 !important;
     color: white !important;
     border-style: none;
     border-radius: 4px !important;
 }
 
 .stFormSubmitButton > button:hover {
-    background-color: #ff8e3c !important;
+    background-color: #FF8E3C !important;
+}
+
+/* Radar chart container */
+
+.radar-chart-container {
+    background-color: #FFFFFF;
+    border-radius: 32px;
+    padding: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 """
