@@ -21,7 +21,7 @@ def save_pdf_file(pdf_file):
 
 def get_ai_extraction(pdf_path):
     """Send PDF to Anthropic AI for data extraction"""
-    from prompts.pdf_extraction import PDF_SYSTEM_PROMPT
+    from prompts.read_pdf_prompt import PDF_SYSTEM_PROMPT
     
     # Extract text from PDF
     pdf_text = ""

@@ -5,6 +5,7 @@ CSS = """
 }
 
 /* Heading styles */
+
 h1 {
     font-size: 2rem !important;
     font-weight: 700 !important;
@@ -27,18 +28,22 @@ h3 {
 }
 
 /* Paragraph style */
+
 p {
     font-size: 1rem !important;
 }
 
 /* Adjust block container width */
+
 .block-container {
     padding-left: 4rem !important;
     padding-right: 4rem !important;
     max-width: 72rem !important;
+    margin-top: -2rem;
 }
 
 /* Remove form borders and padding */
+
 div[data-testid="stForm"] {
     border: none !important;
     padding: 0 !important;
@@ -48,6 +53,7 @@ div[data-testid="stForm"] {
 }
 
 /* Input field spacing */
+
 div.stTextInput, 
 div.stSelectbox, 
 div.stTextArea, 
@@ -55,17 +61,14 @@ div.stFileUploader {
     margin-bottom: 1.6rem !important;
 }
 
-/* Remove resize handle from text areas */
-textarea {
-    overflow: hidden !important;
-}
-
 /* AI Feedback column spacing */
+
 .feedback-column {
     margin-top: 1rem !important;
 }
 
 /* Overall score container */
+
 .overall-score-container {
     padding: 1rem;
     background: linear-gradient(to right, #f25f4c, #f9bc60) !important;  /* Change from left orange to right red */
@@ -89,16 +92,15 @@ textarea {
 }
 
 /* Button styles */
+
 .stFormSubmitButton > button {
     background-color: #ff8e3c !important;
-    border-color: #none; !important;
     border-style: none;
     color: white !important;
 }
 
 .stFormSubmitButton > button:hover {
     background-color: #f9bc60 !important;
-    border-color: none;
 }
 
 """

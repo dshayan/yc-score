@@ -78,13 +78,14 @@ def main():
     if 'form_data' not in st.session_state:
         st.session_state.form_data = {}
 
-    # Move PDF uploader outside the form
-    uploaded_pdf = st.file_uploader(
-        PDF_UPLOAD_LABEL,
-        type=["pdf"],
-        help="Maximum file size: 10MB",
-        key="pdf_uploader"
-    )
+    # Move PDF uploader outside the form but wrap it in columns to match form width
+    pdf_col, _ = st.columns(COLUMN_RATIO)
+    with pdf_col:
+        uploaded_pdf = st.file_uploader(
+            PDF_UPLOAD_LABEL,
+            type=["pdf"],
+            key="pdf_uploader"
+        )
     
     # Handle PDF processing
     if 'pdf_processed' not in st.session_state:
@@ -125,7 +126,7 @@ def main():
             <h2 class="overall-score-text">{OVERALL_SCORE_PREFIX}<span class="score-value">{st.session_state.overall_score}</span>{OVERALL_SCORE_SUFFIX}</h2>
         </div>
         """, unsafe_allow_html=True)
-        
+
     with st.form(FORM_NAME):
         # Founders Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
@@ -179,20 +180,7 @@ def main():
                 PRODUCT_LINK_LABEL,
                 value=st.session_state.get('product_link', '')
             )
-            
-            login_col1, login_col2 = st.columns(2)
-            with login_col1:
-                login_username = st.text_input(
-                    USERNAME_LABEL,
-                    value=st.session_state.get('login_username', '')
-                )
-            with login_col2:
-                login_password = st.text_input(
-                    PASSWORD_LABEL,
-                    value=st.session_state.get('login_password', ''),
-                    type="password"
-                )
-            
+                        
             company_product = st.text_area(
                 COMPANY_PRODUCT_LABEL,
                 value=st.session_state.get('company_product', '')
@@ -349,8 +337,6 @@ def main():
                     {"question": COMPANY_DESCRIPTION_LABEL, "answer": company_description},
                     {"question": COMPANY_URL_LABEL, "answer": company_url},
                     {"question": PRODUCT_LINK_LABEL, "answer": product_link},
-                    {"question": USERNAME_LABEL, "answer": login_username},
-                    {"question": PASSWORD_LABEL, "answer": login_password},
                     {"question": COMPANY_PRODUCT_LABEL, "answer": company_product},
                     {"question": COMPANY_LOCATION_LABEL, "answer": company_location},
                     {"question": LOCATION_EXPLANATION_LABEL, "answer": location_explanation}

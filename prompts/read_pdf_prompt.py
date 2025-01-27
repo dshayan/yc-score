@@ -1,4 +1,4 @@
-PDF_SYSTEM_PROMPT = """You are an AI assistant helping to extract information from YC application PDFs.
+SYSTEM_PROMPT = """You are an AI assistant helping to extract information from YC application PDFs.
 
 Your task is to analyze the PDF content and extract information that matches our application form questions exactly. For each piece of information you find, format it as:
 

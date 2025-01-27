@@ -3,6 +3,13 @@ APP_LOGO = "🈸"
 APP_TITLE = "YC Score"
 APP_SUBTITLE = "Preview feedback on your YC application 👀"
 
+# PDF Upload Section
+PDF_UPLOAD_LABEL = "Upload YC application PDF for auto-fill"
+PDF_UPLOAD_SUCCESS = "PDF uploaded successfully!"
+PDF_SIZE_ERROR = "PDF file size must be less than 10MB"
+PDF_PROCESSING_MESSAGE = "Processing PDF..."
+PDF_EXTRACTION_ERROR = "Error extracting data from PDF: {}"
+
 # Section Headers
 FOUNDERS_HEADER = "Founders"
 FOUNDER_VIDEO_HEADER = "Founder Video"
@@ -21,8 +28,6 @@ COMPANY_DESCRIPTION_LABEL = "Describe what your company does in 50 characters or
 COMPANY_URL_LABEL = "Company URL, if any"
 DEMO_VIDEO_LABEL = "If you have a demo, attach it below."
 PRODUCT_LINK_LABEL = "Please provide a link to the product, if any."
-USERNAME_LABEL = "Username"
-PASSWORD_LABEL = "Password"
 COMPANY_PRODUCT_LABEL = "What is your company going to make? Please describe your product and what it does or will do."
 COMPANY_LOCATION_LABEL = "Where do you live now, and where would the company be based after YC?"
 LOCATION_EXPLANATION_LABEL = "Explain your decision regarding location."
@@ -70,10 +75,3 @@ FILE_HEADER = "# YC Application Submission\n\n"
 # File paths and formats
 DATA_DIRECTORY = 'data'
 TIMESTAMP_FORMAT = "%Y%m%d_%H%M%S"
-
-# PDF Upload Section
-PDF_UPLOAD_LABEL = "Upload YC application PDF for auto-fill"
-PDF_UPLOAD_SUCCESS = "PDF uploaded successfully!"
-PDF_SIZE_ERROR = "PDF file size must be less than 10MB"
-PDF_PROCESSING_MESSAGE = "Processing PDF..."
-PDF_EXTRACTION_ERROR = "Error extracting data from PDF: {}"
