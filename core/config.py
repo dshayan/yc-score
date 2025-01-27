@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from .prompts import SYSTEM_PROMPT
+from prompts.evaluation_prompt import SYSTEM_PROMPT
 
 # Load environment variables from .env file
 load_dotenv()
