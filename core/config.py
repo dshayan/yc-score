@@ -22,3 +22,7 @@ FILE_TIMESTAMP_FORMAT = "%Y%m%d_%H%M%S"
 # Form configuration
 FORM_NAME = "yc_application_form"
 COLUMN_RATIO = [8, 4]  # Form to feedback column ratio
+
+# PDF handling
+MAX_PDF_SIZE = 10 * 1024 * 1024  # 10MB in bytes
+ALLOWED_PDF_TYPES = ["application/pdf"]

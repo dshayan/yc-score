@@ -5,6 +5,7 @@ import streamlit as st
 from core.config import *
 from core.strings import *
 from core.styles import *
+from core.pdf_handler import save_pdf_file, get_ai_extraction, parse_ai_response, update_session_state
 
 st.set_page_config(
     page_title=APP_TITLE,
@@ -61,7 +62,6 @@ def extract_overall_score(response_text):
     return None
 
 def main():
-
     if 'overall_score' not in st.session_state:
         st.session_state.overall_score = None    
     
@@ -85,13 +85,60 @@ def main():
     if 'form_data' not in st.session_state:
         st.session_state.form_data = {}
 
+    # Move PDF uploader outside the form
+    uploaded_pdf = st.file_uploader(
+        PDF_UPLOAD_LABEL,
+        type=["pdf"],
+        help="Maximum file size: 10MB",
+        key="pdf_uploader"
+    )
+    
+    # Handle PDF processing
+    if 'pdf_processed' not in st.session_state:
+        st.session_state.pdf_processed = False
+        
+    # Process PDF only if it's uploaded and not processed yet
+    if uploaded_pdf is not None and not st.session_state.pdf_processed:
+        # Check file size
+        if uploaded_pdf.size > MAX_PDF_SIZE:
+            st.error(PDF_SIZE_ERROR)
+        else:
+            try:
+                with st.spinner(PDF_PROCESSING_MESSAGE):
+                    # Save PDF file
+                    pdf_path = save_pdf_file(uploaded_pdf)
+                    
+                    # Extract data using AI
+                    ai_response = get_ai_extraction(pdf_path)
+                    
+                    # Parse AI response
+                    parsed_data = parse_ai_response(ai_response)
+                    
+                    # Update form fields
+                    update_session_state(parsed_data)
+                    
+                    st.success(PDF_UPLOAD_SUCCESS)
+            except Exception as e:
+                st.error(PDF_EXTRACTION_ERROR.format(str(e)))
+                st.session_state.pdf_processed = False
+    # Reset processing flag when PDF is cleared
+    elif uploaded_pdf is None:
+        st.session_state.pdf_processed = False
+
     with st.form(FORM_NAME):
         # Founders Section
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(FOUNDERS_HEADER)
-            technical_work = st.text_area(TECHNICAL_WORK_LABEL)
-            looking_for_cofounder = st.selectbox(COFOUNDER_LABEL, YES_NO_OPTIONS)
+            technical_work = st.text_area(
+                TECHNICAL_WORK_LABEL,
+                value=st.session_state.get('technical_work', '')
+            )
+            looking_for_cofounder = st.selectbox(
+                COFOUNDER_LABEL,
+                YES_NO_OPTIONS,
+                index=YES_NO_OPTIONS.index(st.session_state.get('looking_for_cofounder', 'No'))
+            )
         with feedback_col:
             if st.session_state.ai_feedback:
                 st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
@@ -113,21 +160,50 @@ def main():
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(COMPANY_HEADER)
-            company_name = st.text_input(COMPANY_NAME_LABEL)
-            company_description = st.text_input(COMPANY_DESCRIPTION_LABEL, max_chars=50)
-            company_url = st.text_input(COMPANY_URL_LABEL)
+            company_name = st.text_input(
+                COMPANY_NAME_LABEL,
+                value=st.session_state.get('company_name', '')
+            )
+            company_description = st.text_input(
+                COMPANY_DESCRIPTION_LABEL,
+                value=st.session_state.get('company_description', ''),
+                max_chars=50
+            )
+            company_url = st.text_input(
+                COMPANY_URL_LABEL,
+                value=st.session_state.get('company_url', '')
+            )
             demo_video = st.file_uploader(DEMO_VIDEO_LABEL, type=["mp4", "mov"])
-            product_link = st.text_input(PRODUCT_LINK_LABEL)
+            product_link = st.text_input(
+                PRODUCT_LINK_LABEL,
+                value=st.session_state.get('product_link', '')
+            )
             
             login_col1, login_col2 = st.columns(2)
             with login_col1:
-                login_username = st.text_input(USERNAME_LABEL)
+                login_username = st.text_input(
+                    USERNAME_LABEL,
+                    value=st.session_state.get('login_username', '')
+                )
             with login_col2:
-                login_password = st.text_input(PASSWORD_LABEL, type="password")
+                login_password = st.text_input(
+                    PASSWORD_LABEL,
+                    value=st.session_state.get('login_password', ''),
+                    type="password"
+                )
             
-            company_product = st.text_area(COMPANY_PRODUCT_LABEL)
-            company_location = st.text_input(COMPANY_LOCATION_LABEL)
-            location_explanation = st.text_area(LOCATION_EXPLANATION_LABEL)
+            company_product = st.text_area(
+                COMPANY_PRODUCT_LABEL,
+                value=st.session_state.get('company_product', '')
+            )
+            company_location = st.text_input(
+                COMPANY_LOCATION_LABEL,
+                value=st.session_state.get('company_location', '')
+            )
+            location_explanation = st.text_area(
+                LOCATION_EXPLANATION_LABEL,
+                value=st.session_state.get('location_explanation', '')
+            )
         with feedback_col:
             if st.session_state.ai_feedback:
                 st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
@@ -138,13 +214,36 @@ def main():
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(PROGRESS_HEADER)
-            progress = st.text_area(PROGRESS_LABEL)
-            working_time = st.text_area(WORKING_TIME_LABEL)
-            tech_stack = st.text_area(TECH_STACK_LABEL)
-            product_users = st.selectbox(PRODUCT_USERS_LABEL, YES_NO_OPTIONS)
-            revenue = st.selectbox(REVENUE_LABEL, YES_NO_OPTIONS)
-            previous_application = st.text_area(PREVIOUS_APPLICATION_LABEL)
-            incubator = st.text_area(INCUBATOR_LABEL)
+            progress = st.text_area(
+                PROGRESS_LABEL,
+                value=st.session_state.get('progress', '')
+            )
+            working_time = st.text_area(
+                WORKING_TIME_LABEL,
+                value=st.session_state.get('working_time', '')
+            )
+            tech_stack = st.text_area(
+                TECH_STACK_LABEL,
+                value=st.session_state.get('tech_stack', '')
+            )
+            product_users = st.selectbox(
+                PRODUCT_USERS_LABEL,
+                YES_NO_OPTIONS,
+                index=YES_NO_OPTIONS.index(st.session_state.get('product_users', 'No'))
+            )
+            revenue = st.selectbox(
+                REVENUE_LABEL,
+                YES_NO_OPTIONS,
+                index=YES_NO_OPTIONS.index(st.session_state.get('revenue', 'No'))
+            )
+            previous_application = st.text_area(
+                PREVIOUS_APPLICATION_LABEL,
+                value=st.session_state.get('previous_application', '')
+            )
+            incubator = st.text_area(
+                INCUBATOR_LABEL,
+                value=st.session_state.get('incubator', '')
+            )
         with feedback_col:
             if st.session_state.ai_feedback:
                 st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
@@ -155,11 +254,27 @@ def main():
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(IDEA_HEADER)
-            idea_explanation = st.text_area(IDEA_EXPLANATION_LABEL)
-            competitors = st.text_area(COMPETITORS_LABEL)
-            business_model = st.text_area(BUSINESS_MODEL_LABEL)
-            category = st.selectbox(CATEGORY_LABEL, CATEGORY_OPTIONS)
-            other_ideas = st.text_area(OTHER_IDEAS_LABEL)
+            idea_explanation = st.text_area(
+                IDEA_EXPLANATION_LABEL,
+                value=st.session_state.get('idea_explanation', '')
+            )
+            competitors = st.text_area(
+                COMPETITORS_LABEL,
+                value=st.session_state.get('competitors', '')
+            )
+            business_model = st.text_area(
+                BUSINESS_MODEL_LABEL,
+                value=st.session_state.get('business_model', '')
+            )
+            category = st.selectbox(
+                CATEGORY_LABEL,
+                CATEGORY_OPTIONS,
+                index=CATEGORY_OPTIONS.index(st.session_state.get('category', CATEGORY_OPTIONS[0]))
+            )
+            other_ideas = st.text_area(
+                OTHER_IDEAS_LABEL,
+                value=st.session_state.get('other_ideas', '')
+            )
         with feedback_col:
             if st.session_state.ai_feedback:
                 st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
@@ -170,9 +285,21 @@ def main():
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(EQUITY_HEADER)
-            legal_entity = st.selectbox(LEGAL_ENTITY_LABEL, YES_NO_OPTIONS)
-            investment = st.selectbox(INVESTMENT_LABEL, YES_NO_OPTIONS)
-            fundraising = st.selectbox(FUNDRAISING_LABEL, YES_NO_OPTIONS)
+            legal_entity = st.selectbox(
+                LEGAL_ENTITY_LABEL,
+                YES_NO_OPTIONS,
+                index=YES_NO_OPTIONS.index(st.session_state.get('legal_entity', 'No'))
+            )
+            investment = st.selectbox(
+                INVESTMENT_LABEL,
+                YES_NO_OPTIONS,
+                index=YES_NO_OPTIONS.index(st.session_state.get('investment', 'No'))
+            )
+            fundraising = st.selectbox(
+                FUNDRAISING_LABEL,
+                YES_NO_OPTIONS,
+                index=YES_NO_OPTIONS.index(st.session_state.get('fundraising', 'No'))
+            )
         with feedback_col:
             if st.session_state.ai_feedback:
                 st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
@@ -183,8 +310,14 @@ def main():
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(CURIOUS_HEADER)
-            yc_motivation = st.text_area(YC_MOTIVATION_LABEL)
-            hear_about_yc = st.text_area(HEAR_ABOUT_YC_LABEL)
+            yc_motivation = st.text_area(
+                YC_MOTIVATION_LABEL,
+                value=st.session_state.get('yc_motivation', '')
+            )
+            hear_about_yc = st.text_area(
+                HEAR_ABOUT_YC_LABEL,
+                value=st.session_state.get('hear_about_yc', '')
+            )
         with feedback_col:
             if st.session_state.ai_feedback:
                 st.markdown('<div class="feedback-column">', unsafe_allow_html=True)

@@ -70,3 +70,10 @@ FILE_HEADER = "# YC Application Submission\n\n"
 # File paths and formats
 DATA_DIRECTORY = 'data'
 TIMESTAMP_FORMAT = "%Y%m%d_%H%M%S"
+
+# PDF Upload Section
+PDF_UPLOAD_LABEL = "Upload YC application PDF for auto-fill"
+PDF_UPLOAD_SUCCESS = "PDF uploaded successfully!"
+PDF_SIZE_ERROR = "PDF file size must be less than 10MB"
+PDF_PROCESSING_MESSAGE = "Processing PDF..."
+PDF_EXTRACTION_ERROR = "Error extracting data from PDF: {}"
