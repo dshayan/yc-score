@@ -55,8 +55,8 @@ CATEGORY_OPTIONS = ["", "B2B", "B2C", "Marketplace", "Hardware", "AI/ML", "Devel
 
 # Messages
 AI_FEEDBACK_HEADER = "### AI Feedback"
-COMPANY_NAME_REQUIRED = "Company name is required."
-COMPANY_DESCRIPTION_REQUIRED = "Company description is required."
+COMPANY_NAME_REQUIRED = "Enter company name."
+COMPANY_DESCRIPTION_REQUIRED = "Enter company description."
 SUCCESS_MESSAGE = "Application submitted successfully! Saved to {}"
 
 # Button Labels

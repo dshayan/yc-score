@@ -422,11 +422,17 @@ def main():
         submitted = st.form_submit_button(SUBMIT_BUTTON_LABEL, type="primary")
 
     if submitted:
-        # Validate required fields
+        # Collect all validation errors
+        error_messages = []
+        
         if not company_name:
-            st.error(COMPANY_NAME_REQUIRED)
-        elif not company_description:
-            st.error(COMPANY_DESCRIPTION_REQUIRED)
+            error_messages.append(COMPANY_NAME_REQUIRED)
+        if not company_description:
+            error_messages.append(COMPANY_DESCRIPTION_REQUIRED)
+            
+        # Show single toast with all errors if any exist
+        if error_messages:
+            st.toast(" ".join(error_messages), icon="⚠️")
         else:
             # Create a dictionary with all the form data
             application_data = {
