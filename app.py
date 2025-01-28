@@ -432,7 +432,7 @@ def main():
             
         # Show single toast with all errors if any exist
         if error_messages:
-            st.toast(" ".join(error_messages), icon="⚠️")
+            st.toast(" ".join(error_messages), icon="❗️")
         else:
             # Create a dictionary with all the form data
             application_data = {
