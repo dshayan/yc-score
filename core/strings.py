@@ -4,7 +4,7 @@ APP_TITLE = "YC Score"
 APP_SUBTITLE = "Preview feedback on your YC application 👀"
 
 # PDF Upload Section
-PDF_UPLOAD_LABEL = "Upload application or startup info to auto-fill form, or fill manually below."
+PDF_UPLOAD_LABEL = "**Upload application or startup info to auto-fill form, or fill manually below.**"
 PDF_UPLOAD_SUCCESS = "PDF uploaded successfully!"
 PDF_SIZE_ERROR = "PDF file size must be less than 10MB"
 PDF_PROCESSING_MESSAGE = "Processing PDF..."

@@ -108,13 +108,13 @@ def create_radar_chart(section_scores):
     
     # Include all sections from the evaluation criteria
     relevant_sections = [
-        FOUNDERS_HEADER,          # 30% weight
-        FOUNDER_VIDEO_HEADER,     # 5% weight
-        COMPANY_HEADER,           # 35% weight
-        PROGRESS_HEADER,          # 15% weight
-        IDEA_HEADER,             # 18% weight
-        EQUITY_HEADER,           # 4% weight
-        CURIOUS_HEADER           # 1% weight
+        FOUNDERS_HEADER,
+        FOUNDER_VIDEO_HEADER,
+        COMPANY_HEADER,
+        PROGRESS_HEADER,
+        IDEA_HEADER,
+        EQUITY_HEADER,
+        CURIOUS_HEADER
     ]
     
     # Filter and order the scores
@@ -127,7 +127,7 @@ def create_radar_chart(section_scores):
         r=scores,
         theta=relevant_sections,
         fill='toself',
-        fillcolor='rgba(255, 142, 60, 0.5)',
+        fillcolor='rgba(255, 137, 6, 0.2)',
         line=dict(color='#ff8906', width=2)
     ))
 
@@ -137,16 +137,25 @@ def create_radar_chart(section_scores):
                 visible=True,
                 range=[0, 100],
                 showline=False,
-                tickfont=dict(size=10)
+                tickfont=dict(
+                    size=10,
+                    color='#6F6E69'
+                ),
+                gridcolor='rgba(111, 110, 105, 0.2)'
             ),
             angularaxis=dict(
-                tickfont=dict(size=12)
-            )
+                tickfont=dict(
+                    size=12,
+                    color='#6F6E69'
+                ),
+                gridcolor='rgba(111, 110, 105, 0.2)'
+            ),
+            bgcolor='rgba(0, 0, 0, 0)'
         ),
         showlegend=False,
         margin=dict(l=32, r=32, t=32, b=32),
         height=320,
-        paper_bgcolor='#fafafa'
+        paper_bgcolor='rgba(0, 0, 0, 0)'
     )
     
     return fig
