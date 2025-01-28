@@ -51,7 +51,14 @@ HEAR_ABOUT_YC_LABEL = "How did you hear about Y Combinator?"
 
 # Options
 YES_NO_OPTIONS = ["", "Yes", "No"]
-CATEGORY_OPTIONS = ["", "B2B", "B2C", "Marketplace", "Hardware", "AI/ML", "Developer Tools", "Other"]
+CATEGORY_OPTIONS = ["", "Adtech", "Aerospace", "Agriculture", "Analytics", "B2B SaaS", "Biotech", 
+                   "Climate", "Community", "Construction", "Continuing Education", "Crypto / Blockchain",
+                   "Developer Tools", "K-12", "Energy", "Entertainment", "Financial Services", "Fitness",
+                   "Food/Beverage", "Freight", "Gaming", "Government", "Hard Tech", "Hardware", "Healthcare",
+                   "Insurance", "Language Learning", "Lending/Loan Management", "Marketplace", "Media",
+                   "Medical Devices", "Mental Health", "Personal Finance", "Real Estate", "Retail",
+                   "Recruiting", "Robotics", "Sales Enablement", "Security", "Transportation",
+                   "Travel/Tourism", "Virtual Reality / AR", "Wellness", "Other"]
 
 # Messages
 AI_FEEDBACK_HEADER = "### AI Feedback"
