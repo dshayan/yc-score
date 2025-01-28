@@ -520,6 +520,9 @@ def main():
             # Show success message
             st.success(SUCCESS_MESSAGE.format(filename))
             st.rerun()
-            
+        
+    # Add footnote at the bottom of the page
+    st.markdown(f'<p class="footnote">{COPYRIGHT_TEXT}</p>', unsafe_allow_html=True)
+                
 if __name__ == "__main__":
     main()

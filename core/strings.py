@@ -63,11 +63,11 @@ SUCCESS_MESSAGE = "Application submitted successfully! Saved to {}"
 SUBMIT_BUTTON_LABEL = "Submit Application"
 
 # Score Labels
-OVERALL_SCORE_LABEL = "Overall Score: "
-
-# Score Labels
 OVERALL_SCORE_PREFIX = "Your application's overall score is "
 OVERALL_SCORE_SUFFIX = "."
+
+# Footer
+COPYRIGHT_TEXT = "Made with ♥️ and AI. Because your 'AI for X' pitch deserves AI feedback before the real thing."
 
 # File Writing
 FILE_HEADER = "# YC Application Submission\n\n"
