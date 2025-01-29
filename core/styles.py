@@ -10,6 +10,15 @@ CSS = """
     box-sizing: border-box !important;
 }
 
+/* Add smooth scrolling to html and body */
+html {
+    scroll-behavior: smooth !important;
+}
+
+body {
+    scroll-behavior: smooth !important;
+}
+
 /* Heading styles */
 h1, h2, h3 {
     font-weight: 700 !important;

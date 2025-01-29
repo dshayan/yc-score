@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+import time
 from anthropic import Anthropic
 import streamlit as st
 from core.config import *
@@ -519,6 +520,15 @@ def main():
             
             # Show success message
             st.success(SUCCESS_MESSAGE.format(filename))
+
+            # Add JavaScript to scroll using the dynamic header ID
+            js_code = """
+                <script>
+                    window.location.href = '#yc-score';
+                </script>
+            """
+            st.markdown(js_code, unsafe_allow_html=True)
+            time.sleep(0.2)
             st.rerun()
         
     # Add footnote at the bottom of the page
