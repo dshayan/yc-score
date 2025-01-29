@@ -1,7 +1,7 @@
 # Form Titles and Headers
 APP_LOGO = "🈸"
 APP_TITLE = "YC Score"
-APP_SUBTITLE = "Preview feedback on your YC application 👀"
+APP_SUBTITLE = "AI trained on YC's playbook judges your application 👀"
 
 # PDF Upload Section
 PDF_UPLOAD_LABEL = "**Upload application or startup info to auto-fill form, or fill manually below.**"

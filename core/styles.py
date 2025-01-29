@@ -2,11 +2,11 @@ CSS = """
 /* CSS Variables */
 * {
     font-family: 'Avenir', sans-serif !important;
-    --primary-color: #FF8906;
-    --primary-hover: #FF8E3C;
+    --primary-color: #FF6D00;
+    --primary-hover: #EF6C00;
     --text-gray: #6F6E69;
-    --gradient-start: #F25F4C;
-    --gradient-end: #FF8E3C;
+    --gradient-start: #FF5722;
+    --gradient-end: #FF9100;
     box-sizing: border-box !important;
 }
 
@@ -101,7 +101,23 @@ div.stFileUploader {
 }
 
 .stFormSubmitButton > button:focus {
-    box-shadow: 0 0 0 2px var(--primary-hover) !important;
+    outline: none !important;
+}
+
+[data-testid="stFileUploader"] button[kind="secondary"] {
+    background-color: none !important;
+    color: var(--primary-color) !important;
+    border: 1px solid var(--primary-color) !important;
+    border-radius: 4px !important;
+    transition: all 0.2s ease !important;
+}
+
+[data-testid="stFileUploader"] button[kind="secondary"]:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+[data-testid="stFileUploader"] button[kind="secondary"]:focus {
     outline: none !important;
 }
 

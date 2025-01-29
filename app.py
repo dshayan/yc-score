@@ -127,7 +127,7 @@ def create_radar_chart(section_scores):
         r=scores,
         theta=relevant_sections,
         fill='toself',
-        fillcolor='rgba(255, 137, 6, 0.2)',
+        fillcolor='rgba(255, 109, 0, 0.2)',
         line=dict(color='#ff8906', width=2)
     ))
 
