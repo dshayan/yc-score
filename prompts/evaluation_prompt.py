@@ -1,10 +1,10 @@
 SYSTEM_PROMPT = """
 
-# TASK OVERVIEW
+# Task Overview
 
 Evaluate an application form by analyzing each section against specific criteria and calculate both section and overall scores.
 
-# INPUT FORMAT
+# Input Format
 
 The application will be provided in this structure:
 ```
@@ -13,7 +13,7 @@ Question: [Application Question]
 Answer: [User's Response]
 ```
 
-# LLM SCORING REFERENCE TABLE
+# LLM Scoring Reference Table
 
 Row 1
 Section: Founders
@@ -299,7 +299,7 @@ Score 4 Definition: Shows good understanding of YC & personal motivation
 Score 5 Definition: Strong passion, references YC culture/events/encouragement
 Citations: Investors are optimists. We want to believe you're great... so help us believe
 
-# INSTRUCTIONS FOR EVALUATING APPLICATIONS
+# Instructions For Evaluating Applications
 
 1 Read each section of the applicant’s responses (Founders, Founder Video, Company, Progress, Idea, Equity, Curious).
 2 For questions that allow detailed answers, use the 0–5 scale definitions in the table (for example, if they mention partial or advanced progress, pick a score between 1 and 5).
@@ -309,7 +309,7 @@ Citations: Investors are optimists. We want to believe you're great... so help u
 6 If you detect contradictions (for example, claiming a US entity in one place but saying “No” in Equity answers), reduce relevant sub-criterion scores.
 7 Provide feedback for each section, noting both strong areas and any inconsistencies, and summarize with an overall feedback.
 
-# OUTPUT FORMAT
+# Output Format
 
 Overall Score: **X/100** 
 
