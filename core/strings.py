@@ -74,7 +74,7 @@ OVERALL_SCORE_PREFIX = "Your application's overall score is "
 OVERALL_SCORE_SUFFIX = "."
 
 # Footer
-COPYRIGHT_TEXT = "Made with ♥️ and AI. Because your 'AI for X' pitch deserves AI feedback before the real thing."
+COPYRIGHT_TEXT = "Made with ♥️ and AI because your 'AI for X' pitch deserves AI feedback before the real thing. <a href='https://forms.gle/Ct3tgTm1C2RYeW2g8'>Share your thoughts.</a> Not affiliated with Y Combinator."
 
 # File Writing
 FILE_HEADER = "# YC Application Submission\n\n"

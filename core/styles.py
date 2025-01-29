@@ -137,4 +137,12 @@ div.stFileUploader {
     margin-bottom: -8rem;
     position: relative !important;
 }
+
+.footnote a {
+    color: var(--text-gray) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 4px;
+}
+
 """
