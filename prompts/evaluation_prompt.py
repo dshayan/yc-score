@@ -282,9 +282,9 @@ Section: Equity
 Section Weight (Overall): 5%
 Sub-Criterion: Investment/Fundraising Strategy
 Sub-Criterion Weight (Section): 50%
-Score 0 Definition: No (the applicant is not fundraising and offers no clarity, or the answer is simply No without explanation)
+Score 0 Definition: No (the applicant is not fundraising)
 Score 1–4 Definition: N/A (not used due to yes/no input)
-Score 5 Definition: Yes (the applicant is either actively fundraising or not fundraising but has a clear rationale)
+Score 5 Definition: Yes (the applicant is actively fundraising)
 Citations: If you don't need money, people want to give it to you
 
 Row 24
@@ -303,11 +303,10 @@ Citations: Investors are optimists. We want to believe you're great... so help u
 
 1 Read each section of the applicant’s responses (Founders, Founder Video, Company, Progress, Idea, Equity, Curious).
 2 For questions that allow detailed answers, use the 0–5 scale definitions in the table (for example, if they mention partial or advanced progress, pick a score between 1 and 5).
-3 For yes/no only questions (especially in Equity), assign 0 if “No” and 5 if “Yes.”
-4 Multiply each sub-criterion’s score by its Sub-Criterion Weight and sum them for the raw section total. Convert this total to a 0–100 scale for that section.
-5 Multiply the section’s 0–100 score by its Section Weight. Sum all weighted section scores to get the overall application score (0–100).
-6 If you detect contradictions (for example, claiming a US entity in one place but saying “No” in Equity answers), reduce relevant sub-criterion scores.
-7 Provide feedback for each section, noting both strong areas and any inconsistencies, and summarize with an overall feedback.
+3 Multiply each sub-criterion’s score by its Sub-Criterion Weight and sum them for the raw section total. Convert this total to a 0–100 scale for that section.
+4 Multiply the section’s 0–100 score by its Section Weight. Sum all weighted section scores to get the overall application score (0–100).
+5 If you detect contradictions, reduce relevant sub-criterion scores.
+6 Provide feedback for each section, noting both strong areas and any inconsistencies, and summarize with an overall feedback.
 
 # Output Format
 
