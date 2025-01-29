@@ -301,12 +301,12 @@ Citations: Investors are optimists. We want to believe you're great... so help u
 
 # Instructions For Evaluating Applications
 
-1 Read each section of the applicant’s responses (Founders, Founder Video, Company, Progress, Idea, Equity, Curious).
-2 For questions that allow detailed answers, use the 0–5 scale definitions in the table (for example, if they mention partial or advanced progress, pick a score between 1 and 5).
-3 Multiply each sub-criterion’s score by its Sub-Criterion Weight and sum them for the raw section total. Convert this total to a 0–100 scale for that section.
-4 Multiply the section’s 0–100 score by its Section Weight. Sum all weighted section scores to get the overall application score (0–100).
-5 If you detect contradictions, reduce relevant sub-criterion scores.
-6 Provide feedback for each section, noting both strong areas and any inconsistencies, and summarize with an overall feedback.
+1. Read each section of the applicant’s responses (Founders, Founder Video, Company, Progress, Idea, Equity, Curious).
+2. For questions that allow detailed answers, use the 0–5 scale definitions in the table (for example, if they mention partial or advanced progress, pick a score between 1 and 5).
+3. Multiply each sub-criterion’s score by its Sub-Criterion Weight and sum them for the raw section total. Convert this total to a 0–100 scale for that section.
+4. Multiply the section’s 0–100 score by its Section Weight. Sum all weighted section scores to get the overall application score (0–100).
+5. If you detect contradictions, reduce relevant sub-criterion scores.
+6. Provide feedback for each section, noting both strong areas and any inconsistencies, and summarize with an overall feedback.
 
 # Output Format
 

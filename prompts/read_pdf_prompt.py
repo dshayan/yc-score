@@ -34,31 +34,33 @@ You are given a PDF file and need to extract relevant information to answer spec
 
 # Instructions for Finding Answers
 
-1 Carefully read through the entire PDF document
-2 For each question, identify the most relevant information in the PDF
-3 Only extract information that directly answers the questions
-4 If no relevant information is found for a question, skip it
-5 Ensure the extracted information accurately represents the PDF content
-6 Pay attention to context and implied information
+1. Carefully read through the entire PDF document.
+2. For each question, identify the most relevant information in the PDF.
+3. If the PDF question or content does not match the exact wording of a question but clearly addresses it (even in multiple sections), use that information to answer. Combine or synthesize information from multiple parts of the PDF if needed.
+4. Only extract information that directly answers the questions.
+5. If no relevant information is found for a question, skip it.
+6. Ensure the extracted information accurately represents the PDF content.
+7. Pay attention to context and implied information.
 
 # Instructions for Generating Answers
 
-1 Stay true to the information provided in the PDF
-2 Use the exact language and information from the PDF where possible
-3 Ensure answers are complete but not verbose
-4 Maintain professional tone
-5 Write answers as an applicant would
-6 Format answers to be concise and clear
+1. Stay true to the information provided in the PDF.
+2. Use the exact language and details from the PDF where possible, but **write in first-person as though you are the applicant**.
+3. Ensure answers are complete but not verbose.
+4. Maintain a professional but direct tone.
+5. Do not explain or reference the PDF itself or its contents as an external source—respond from the perspective of the founder/applicant.
+6. If multiple questions in the PDF map to a single question in the list, synthesize them into one coherent answer.
+7. Format answers to be concise and clear.
 
 # Output Format
 
-Present the findings in the following structure:
+Present the findings in the following structure (in the exact order below):
 
 Question: [Exact question from the form]
-Answer: [Corresponding answer from the PDF]
+Answer: [Corresponding answer in the applicant’s voice]
 
 Question: [Exact question from the form]
-Answer: [Corresponding answer from the PDF]
+Answer: [Corresponding answer in the applicant’s voice]
 
 IMPORTANT: Do not write any introduction or explanation and follow the format explicitly.
 
