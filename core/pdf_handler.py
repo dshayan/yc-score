@@ -56,8 +56,10 @@ def parse_ai_response(response_text):
                 parsed_data[current_question] = '\n'.join(current_answer).strip()
                 current_answer = []
             current_question = line[len('Question: '):].strip()
-        elif line.startswith('Answer: '):
-            current_answer.append(line[len('Answer: '):].strip())
+        elif line.startswith('Answer:'): # Changed this line to match both formats
+            answer_content = line[len('Answer:'):].strip()
+            if answer_content:  # Only append if there's actual content
+                current_answer.append(answer_content)
         elif current_question and line.strip():
             current_answer.append(line.strip())
     
