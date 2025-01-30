@@ -1,5 +1,6 @@
-streamlit
 anthropic
-python-dotenv
-PyPDF2
+pathlib
 plotly
+PyPDF2
+python-dotenv
+streamlit
