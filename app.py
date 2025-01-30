@@ -258,7 +258,8 @@ def main():
         form_col, feedback_col = st.columns(COLUMN_RATIO)
         with form_col:
             st.header(FOUNDER_VIDEO_HEADER)
-            founder_video = st.file_uploader(FOUNDER_VIDEO_LABEL, type=["mp4", "mov"])
+            ## founder_video = st.file_uploader(FOUNDER_VIDEO_LABEL, type=["mp4", "mov"])
+            st.text_input(FOUNDER_VIDEO_LABEL, value=FOUNDER_VIDEO_DISABLED_TEXT, disabled=True)
         with feedback_col:
             if st.session_state.ai_feedback:
                 st.markdown('<div class="feedback-column">', unsafe_allow_html=True)
@@ -282,7 +283,8 @@ def main():
                 COMPANY_URL_LABEL,
                 value=st.session_state.get('company_url', '')
             )
-            demo_video = st.file_uploader(DEMO_VIDEO_LABEL, type=["mp4", "mov"])
+            ## demo_video = st.file_uploader(DEMO_VIDEO_LABEL, type=["mp4", "mov"])
+            st.text_input(DEMO_VIDEO_LABEL, value=DEMO_VIDEO_DISABLED_TEXT, disabled=True)
             product_link = st.text_input(
                 PRODUCT_LINK_LABEL,
                 value=st.session_state.get('product_link', '')
@@ -444,12 +446,13 @@ def main():
                             {"question": COFOUNDER_LABEL, "answer": looking_for_cofounder}
                         ],
                         FOUNDER_VIDEO_HEADER: [
-                            {"question": FOUNDER_VIDEO_LABEL, "answer": founder_video.name if founder_video else ""}
+                            {"question": FOUNDER_VIDEO_LABEL, "answer": FOUNDER_VIDEO_DISABLED_TEXT}
                         ],
                         COMPANY_HEADER: [
                             {"question": COMPANY_NAME_LABEL, "answer": company_name},
                             {"question": COMPANY_DESCRIPTION_LABEL, "answer": company_description},
                             {"question": COMPANY_URL_LABEL, "answer": company_url},
+                            {"question": DEMO_VIDEO_LABEL, "answer": DEMO_VIDEO_DISABLED_TEXT},
                             {"question": PRODUCT_LINK_LABEL, "answer": product_link},
                             {"question": COMPANY_PRODUCT_LABEL, "answer": company_product},
                             {"question": COMPANY_LOCATION_LABEL, "answer": company_location},
