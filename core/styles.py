@@ -3,7 +3,7 @@ CSS = """
 * {
     font-family: 'Avenir', sans-serif !important;
     --primary-color: #FF6D00;
-    --primary-hover: #EF6C00;
+    --secondary-color: #EF6C00;
     --text-gray: #6F6E69;
     --gradient-start: #FF5722;
     --gradient-end: #FF9100;
@@ -106,7 +106,7 @@ div.stFileUploader {
 }
 
 .stFormSubmitButton > button:hover {
-    background-color: var(--primary-hover) !important;
+    background-color: var(--secondary-color) !important;
 }
 
 .stFormSubmitButton > button:focus {
@@ -128,6 +128,12 @@ div.stFileUploader {
 
 [data-testid="stFileUploader"] button[kind="secondary"]:focus {
     outline: none !important;
+}
+
+/* Add spinner styling */
+div[data-testid="stSpinner"] i[class*="st-emotion-cache-"] {
+    border-color: var(--secondary-color) !important;
+    border-bottom-color: transparent !important;
 }
 
 /* Radar chart container */
