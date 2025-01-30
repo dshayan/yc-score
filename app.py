@@ -98,9 +98,6 @@ def extract_section_scores(response_text):
                                 continue
                     break
     
-    """# Debug print to verify scores
-    print("Extracted section scores:", section_scores)"""
-    
     return section_scores
 
 def create_radar_chart(section_scores):
@@ -120,10 +117,7 @@ def create_radar_chart(section_scores):
     
     # Filter and order the scores
     scores = [section_scores.get(section, 0) for section in relevant_sections]
-    
-    # Debug print to check scores
-    print("Section scores:", dict(zip(relevant_sections, scores)))
-    
+        
     fig = go.Figure(data=go.Scatterpolar(
         r=scores,
         theta=relevant_sections,
@@ -518,17 +512,6 @@ def main():
             with open(filename, 'w') as f:
                 f.write(content)
             
-            # Show success message
-            st.success(SUCCESS_MESSAGE.format(filename))
-
-            # Add JavaScript to scroll using the dynamic header ID
-            js_code = """
-                <script>
-                    window.location.href = '#yc-score';
-                </script>
-            """
-            st.markdown(js_code, unsafe_allow_html=True)
-            time.sleep(0.2)
             st.rerun()
         
     # Add footnote at the bottom of the page
