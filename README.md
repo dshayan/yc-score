@@ -1,6 +1,6 @@
 # YC Score
 
-An application that provides instant AI feedback on Y Combinator application drafts using Claude 3.5 Sonnet.
+YC Score provides instant feedback on Y Combinator application drafts using AI, based on publicly available YC application criteria.
 
 ## Features
 
