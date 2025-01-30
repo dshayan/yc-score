@@ -5,10 +5,10 @@ APP_SUBTITLE = "AI trained on YC's playbook judges your application 👀"
 
 # PDF Upload Section
 PDF_UPLOAD_LABEL = "**Upload application or startup info to auto-fill form, or fill manually below.**"
-PDF_UPLOAD_SUCCESS = "PDF uploaded successfully!"
+PDF_UPLOAD_SUCCESS = "PDF uploaded!"
 PDF_SIZE_ERROR = "PDF file size must be less than 10MB"
-PDF_PROCESSING_MESSAGE = "Processing PDF..."
-PDF_EXTRACTION_ERROR = "Error extracting data from PDF: {}"
+PDF_PROCESSING_MESSAGE = "Reading your PDF and filling out the form..."
+PDF_EXTRACTION_ERROR = "Sorry, I had trouble reading your PDF: {}"
 
 # Section Headers
 FOUNDERS_HEADER = "Founders"
@@ -62,20 +62,19 @@ CATEGORY_OPTIONS = ["", "Adtech", "Aerospace", "Agriculture", "Analytics", "B2B 
 
 # Messages
 AI_FEEDBACK_HEADER = "### AI Feedback"
-COMPANY_NAME_REQUIRED = "Enter company name."
-COMPANY_DESCRIPTION_REQUIRED = "Enter company description."
-SUCCESS_MESSAGE = "Application submitted successfully! Saved to {}"
+COMPANY_NAME_REQUIRED = "Please enter your company name"
+COMPANY_DESCRIPTION_REQUIRED = "Please add a brief description of your company"
+PROCESSING_MESSAGE = "Evaluating your application against YC's criteria..."
 
 # Button Labels
-SUBMIT_BUTTON_LABEL = "Submit Application"
-PROCESSING_MESSAGE = "Processing your application..."  # Add this line
+SUBMIT_BUTTON_LABEL = "Review My Application"
 
 # Score Labels
 OVERALL_SCORE_PREFIX = "Your application's overall score is "
 OVERALL_SCORE_SUFFIX = "."
 
 # Footer
-COPYRIGHT_TEXT = "Made with ♥️ and AI because your 'AI for X' pitch deserves AI feedback before the real thing. <a href='https://forms.gle/Ct3tgTm1C2RYeW2g8'>Share your thoughts.</a> Not affiliated with Y Combinator."
+COPYRIGHT_TEXT = "Not affiliated with Y Combinator. Made with ♥️ and AI by a YC reject. <a href='https://forms.gle/Ct3tgTm1C2RYeW2g8'>Share your thoughts.</a>"
 
 # File Writing
 FILE_HEADER = "# YC Application Submission\n\n"
