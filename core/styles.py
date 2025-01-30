@@ -19,7 +19,7 @@ CSS = """
 /* Main content area */
 .main {
     flex: 1 0 auto !important;
-    padding-bottom: 2rem !important;
+    padding-bottom: 1rem !important;
 }
 
 /* Form container */
@@ -30,7 +30,7 @@ div[data-testid="stForm"] {
     border-radius: 0 !important;
     background-color: transparent !important;
     box-shadow: none !important;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem !important;
 }
 
 /* Add smooth scrolling to html and body */
@@ -158,6 +158,7 @@ div[data-testid="stSpinner"] i[class*="st-emotion-cache-"] {
     color: var(--text-gray) !important;
     text-align: left !important;
     padding: 1rem 0 1rem 0 !important;
+    margin-top: 4rem !important;
 }
 
 .footnote a {

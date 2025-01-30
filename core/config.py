@@ -1,9 +1,14 @@
 import os
 from dotenv import load_dotenv
+import pathlib
 from prompts.evaluation_prompt import SYSTEM_PROMPT
 
 # Load environment variables from .env file
 load_dotenv()
+
+# Image assets
+ASSETS_DIR = pathlib.Path("assets")
+LOGO_PATH = ASSETS_DIR / "logo.png"
 
 # Get API key from environment variables
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')

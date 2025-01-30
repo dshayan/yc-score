@@ -10,7 +10,7 @@ from core.pdf_handler import save_pdf_file, get_ai_extraction, parse_ai_response
 
 st.set_page_config(
     page_title=APP_TITLE,
-    page_icon=APP_LOGO,
+    page_icon=str(LOGO_PATH),
 )
 
 # Apply custom CSS
@@ -165,8 +165,7 @@ def main():
     # Wrap main content in a div
     st.markdown('<div class="main">', unsafe_allow_html=True)
 
-    st.title(APP_LOGO)
-    st.title(APP_TITLE)
+    st.image(LOGO_PATH)
     st.markdown(f'<p class="app-subtitle">{APP_SUBTITLE}</p>', unsafe_allow_html=True)
 
     if 'ai_feedback' not in st.session_state:

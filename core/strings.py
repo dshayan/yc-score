@@ -1,5 +1,4 @@
 # Form Titles and Headers
-APP_LOGO = "🈸"
 APP_TITLE = "YC Score"
 APP_SUBTITLE = "AI trained on YC's playbook judges your application 👀"
 
