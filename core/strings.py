@@ -68,6 +68,7 @@ SUCCESS_MESSAGE = "Application submitted successfully! Saved to {}"
 
 # Button Labels
 SUBMIT_BUTTON_LABEL = "Submit Application"
+PROCESSING_MESSAGE = "Processing your application..."  # Add this line
 
 # Score Labels
 OVERALL_SCORE_PREFIX = "Your application's overall score is "

@@ -413,109 +413,118 @@ def main():
                 st.markdown(st.session_state.ai_feedback[CURIOUS_HEADER])
                 st.markdown('</div>', unsafe_allow_html=True)
         
-        # Submit button at the bottom of the form
-        submitted = st.form_submit_button(SUBMIT_BUTTON_LABEL, type="primary")
+        # Create a container for submit button and processing message
+        submit_container = st.container()
+        with submit_container:
+            submitted = st.form_submit_button(SUBMIT_BUTTON_LABEL, type="primary")
+            if submitted:
+                st.markdown("""
+                    <div class="processing-container">
+                        <div class="spinner"></div>
+                        <p class="processing-message">Processing your application...</p>
+                    </div>
+                """, unsafe_allow_html=True)
 
-    if submitted:
-        # Collect all validation errors
-        error_messages = []
+        # Add footnote at the bottom of the page
+        st.markdown(f'<p class="footnote">{COPYRIGHT_TEXT}</p>', unsafe_allow_html=True)
         
-        if not company_name:
-            error_messages.append(COMPANY_NAME_REQUIRED)
-        if not company_description:
-            error_messages.append(COMPANY_DESCRIPTION_REQUIRED)
+        if submitted:
+            # Collect all validation errors
+            error_messages = []
             
-        # Show single toast with all errors if any exist
-        if error_messages:
-            st.toast(" ".join(error_messages), icon="❗️")
-        else:
-            # Create a dictionary with all the form data
-            application_data = {
-                FOUNDERS_HEADER: [
-                    {"question": TECHNICAL_WORK_LABEL, "answer": technical_work},
-                    {"question": COFOUNDER_LABEL, "answer": looking_for_cofounder}
-                ],
-                FOUNDER_VIDEO_HEADER: [
-                    {"question": FOUNDER_VIDEO_LABEL, "answer": founder_video.name if founder_video else ""}
-                ],
-                COMPANY_HEADER: [
-                    {"question": COMPANY_NAME_LABEL, "answer": company_name},
-                    {"question": COMPANY_DESCRIPTION_LABEL, "answer": company_description},
-                    {"question": COMPANY_URL_LABEL, "answer": company_url},
-                    {"question": PRODUCT_LINK_LABEL, "answer": product_link},
-                    {"question": COMPANY_PRODUCT_LABEL, "answer": company_product},
-                    {"question": COMPANY_LOCATION_LABEL, "answer": company_location},
-                    {"question": LOCATION_EXPLANATION_LABEL, "answer": location_explanation}
-                ],
-                PROGRESS_HEADER: [
-                    {"question": PROGRESS_LABEL, "answer": progress},
-                    {"question": WORKING_TIME_LABEL, "answer": working_time},
-                    {"question": TECH_STACK_LABEL, "answer": tech_stack},
-                    {"question": PRODUCT_USERS_LABEL, "answer": product_users},
-                    {"question": REVENUE_LABEL, "answer": revenue},
-                    {"question": PREVIOUS_APPLICATION_LABEL, "answer": previous_application},
-                    {"question": INCUBATOR_LABEL, "answer": incubator}
-                ],
-                IDEA_HEADER: [
-                    {"question": IDEA_EXPLANATION_LABEL, "answer": idea_explanation},
-                    {"question": COMPETITORS_LABEL, "answer": competitors},
-                    {"question": BUSINESS_MODEL_LABEL, "answer": business_model},
-                    {"question": CATEGORY_LABEL, "answer": category},
-                    {"question": OTHER_IDEAS_LABEL, "answer": other_ideas}
-                ],
-                EQUITY_HEADER: [
-                    {"question": LEGAL_ENTITY_LABEL, "answer": legal_entity},
-                    {"question": INVESTMENT_LABEL, "answer": investment},
-                    {"question": FUNDRAISING_LABEL, "answer": fundraising}
-                ],
-                CURIOUS_HEADER: [
-                    {"question": YC_MOTIVATION_LABEL, "answer": yc_motivation},
-                    {"question": HEAR_ABOUT_YC_LABEL, "answer": hear_about_yc}
-                ]
-            }
-            
-            # Create the content string for file and AI review
-            content = FILE_HEADER
-            for section, questions in application_data.items():
-                content += f"## {section}\n\n"
-                for item in questions:
-                    content += f"Question: {item['question']}\n"
-                    content += f"Answer: {item['answer']}\n\n"
-                content += "\n"
-            
-            # Get AI feedback
-            client = Anthropic(api_key=ANTHROPIC_API_KEY)
-            response = client.messages.create(
-                model=CLAUDE_MODEL,
-                max_tokens=MAX_TOKENS,
-                temperature=MODEL_TEMPERATURE,
-                system=SYSTEM_PROMPT,
-                messages=[{"role": "user", "content": content}]
-            )
-            
-            # Extract and store overall score
-            st.session_state.overall_score = extract_overall_score(response.content[0].text)
-            
-            # Extract section scores and create radar chart
-            section_scores = extract_section_scores(response.content[0].text)
-            radar_chart = create_radar_chart(section_scores)
-            st.session_state.radar_chart = radar_chart
-
-            # Process and store AI feedback
-            st.session_state.ai_feedback = process_ai_feedback(response.content[0].text)
-            
-            # Generate timestamp and filename
-            timestamp = datetime.now().strftime(FILE_TIMESTAMP_FORMAT)
-            filename = f"{DATA_DIRECTORY}/form-{timestamp}.txt"
-            
-            # Write the data to a file
-            with open(filename, 'w') as f:
-                f.write(content)
-            
-            st.rerun()
-        
-    # Add footnote at the bottom of the page
-    st.markdown(f'<p class="footnote">{COPYRIGHT_TEXT}</p>', unsafe_allow_html=True)
+            if not company_name:
+                error_messages.append(COMPANY_NAME_REQUIRED)
+            if not company_description:
+                error_messages.append(COMPANY_DESCRIPTION_REQUIRED)
                 
+            # Show single toast with all errors if any exist
+            if error_messages:
+                st.toast(" ".join(error_messages), icon="❗️")
+            else:
+                # Create a dictionary with all the form data
+                application_data = {
+                    FOUNDERS_HEADER: [
+                        {"question": TECHNICAL_WORK_LABEL, "answer": technical_work},
+                        {"question": COFOUNDER_LABEL, "answer": looking_for_cofounder}
+                    ],
+                    FOUNDER_VIDEO_HEADER: [
+                        {"question": FOUNDER_VIDEO_LABEL, "answer": founder_video.name if founder_video else ""}
+                    ],
+                    COMPANY_HEADER: [
+                        {"question": COMPANY_NAME_LABEL, "answer": company_name},
+                        {"question": COMPANY_DESCRIPTION_LABEL, "answer": company_description},
+                        {"question": COMPANY_URL_LABEL, "answer": company_url},
+                        {"question": PRODUCT_LINK_LABEL, "answer": product_link},
+                        {"question": COMPANY_PRODUCT_LABEL, "answer": company_product},
+                        {"question": COMPANY_LOCATION_LABEL, "answer": company_location},
+                        {"question": LOCATION_EXPLANATION_LABEL, "answer": location_explanation}
+                    ],
+                    PROGRESS_HEADER: [
+                        {"question": PROGRESS_LABEL, "answer": progress},
+                        {"question": WORKING_TIME_LABEL, "answer": working_time},
+                        {"question": TECH_STACK_LABEL, "answer": tech_stack},
+                        {"question": PRODUCT_USERS_LABEL, "answer": product_users},
+                        {"question": REVENUE_LABEL, "answer": revenue},
+                        {"question": PREVIOUS_APPLICATION_LABEL, "answer": previous_application},
+                        {"question": INCUBATOR_LABEL, "answer": incubator}
+                    ],
+                    IDEA_HEADER: [
+                        {"question": IDEA_EXPLANATION_LABEL, "answer": idea_explanation},
+                        {"question": COMPETITORS_LABEL, "answer": competitors},
+                        {"question": BUSINESS_MODEL_LABEL, "answer": business_model},
+                        {"question": CATEGORY_LABEL, "answer": category},
+                        {"question": OTHER_IDEAS_LABEL, "answer": other_ideas}
+                    ],
+                    EQUITY_HEADER: [
+                        {"question": LEGAL_ENTITY_LABEL, "answer": legal_entity},
+                        {"question": INVESTMENT_LABEL, "answer": investment},
+                        {"question": FUNDRAISING_LABEL, "answer": fundraising}
+                    ],
+                    CURIOUS_HEADER: [
+                        {"question": YC_MOTIVATION_LABEL, "answer": yc_motivation},
+                        {"question": HEAR_ABOUT_YC_LABEL, "answer": hear_about_yc}
+                    ]
+                }
+                
+                # Create the content string for file and AI review
+                content = FILE_HEADER
+                for section, questions in application_data.items():
+                    content += f"## {section}\n\n"
+                    for item in questions:
+                        content += f"Question: {item['question']}\n"
+                        content += f"Answer: {item['answer']}\n\n"
+                    content += "\n"
+                
+                # Get AI feedback
+                client = Anthropic(api_key=ANTHROPIC_API_KEY)
+                response = client.messages.create(
+                    model=CLAUDE_MODEL,
+                    max_tokens=MAX_TOKENS,
+                    temperature=MODEL_TEMPERATURE,
+                    system=SYSTEM_PROMPT,
+                    messages=[{"role": "user", "content": content}]
+                )
+                
+                # Extract and store overall score
+                st.session_state.overall_score = extract_overall_score(response.content[0].text)
+                
+                # Extract section scores and create radar chart
+                section_scores = extract_section_scores(response.content[0].text)
+                radar_chart = create_radar_chart(section_scores)
+                st.session_state.radar_chart = radar_chart
+
+                # Process and store AI feedback
+                st.session_state.ai_feedback = process_ai_feedback(response.content[0].text)
+                
+                # Generate timestamp and filename
+                timestamp = datetime.now().strftime(FILE_TIMESTAMP_FORMAT)
+                filename = f"{DATA_DIRECTORY}/form-{timestamp}.txt"
+                
+                # Write the data to a file
+                with open(filename, 'w') as f:
+                    f.write(content)
+                
+                st.rerun()
+                            
 if __name__ == "__main__":
     main()

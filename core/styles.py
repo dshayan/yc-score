@@ -134,6 +134,12 @@ div.stFileUploader {
 div[data-testid="stSpinner"] i[class*="st-emotion-cache-"] {
     border-color: var(--secondary-color) !important;
     border-bottom-color: transparent !important;
+    width: 20px !important;
+    height: 20px !important;
+    border: 2px solid var(--text-gray) !important;
+    border-radius: 50% !important;
+    animation: spin 1s linear infinite !important;
+
 }
 
 /* Radar chart container */
@@ -142,14 +148,21 @@ div[data-testid="stSpinner"] i[class*="st-emotion-cache-"] {
     margin-block: 0;
 }
 
+/* Processing message style */
+.processing-message {
+    color: var(--text-gray) !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 2rem !important;
+    font-style: italic !important;
+}
+
 /* Footnote style */
 .footnote {
     font-size: 0.8rem !important;
     color: var(--text-gray) !important;
     text-align: left !important;
     padding: 2rem 0 1rem 0 !important;
-    margin-top: 4rem !important;
-    margin-bottom: -8rem;
+    margin-top: 2rem !important;
     position: relative !important;
 }
 
@@ -158,6 +171,19 @@ div[data-testid="stSpinner"] i[class*="st-emotion-cache-"] {
     text-decoration: underline !important;
     text-underline-offset: 4px;
     text-decoration-thickness: 4px;
+}
+
+/* Processing container and spinner */
+.processing-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin: 1rem 0 !important;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 """
