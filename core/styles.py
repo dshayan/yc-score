@@ -7,7 +7,30 @@ CSS = """
     --text-gray: #6F6E69;
     --gradient-start: #FF5722;
     --gradient-end: #FF9100;
-    box-sizing: border-box !important;
+}
+
+/* Page layout */
+.block-container {
+    min-height: 100vh !important;
+    padding-bottom: 0 !important;
+    max-width: 64rem !important;    
+}
+
+/* Main content area */
+.main {
+    flex: 1 0 auto !important;
+    padding-bottom: 2rem !important;
+}
+
+/* Form container */
+div[data-testid="stForm"] {
+    flex: 1 !important;
+    border: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    margin-bottom: 4rem;
 }
 
 /* Add smooth scrolling to html and body */
@@ -37,31 +60,15 @@ h3 {
     font-size: 1.2rem !important;
 }
 
-.app-subtitle {
-    font-size: 1rem !important;
-    color: var(--text-gray) !important;
-    margin-bottom: 4rem !important;
-}
-
 /* Paragraph style */
 p {
     font-size: 1rem !important;
 }
 
-/* Adjust block container width */
-.block-container {
-    padding-inline: 4rem !important;
-    max-width: 72rem !important;
-    margin-top: -2rem;
-}
-
-/* Remove form borders and padding */
-div[data-testid="stForm"] {
-    border: none !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
+.app-subtitle {
+    font-size: 1rem !important;
+    color: var(--text-gray) !important;
+    margin-bottom: 4rem !important;
 }
 
 /* Input field spacing */
@@ -75,25 +82,6 @@ div.stFileUploader {
 /* AI Feedback column spacing */
 .feedback-column {
     margin-top: 1rem !important;
-}
-
-/* Overall score container */
-.overall-score-container {
-    padding: 1rem;
-    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end)) !important;
-    border-radius: 8px !important;
-    margin-block: 1rem !important;
-}
-
-.overall-score-text {
-    margin: 0;
-    color: #FFFFFF !important;
-}
-
-.score-value {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 4px;
 }
 
 /* Button styles */
@@ -134,12 +122,27 @@ div.stFileUploader {
 div[data-testid="stSpinner"] i[class*="st-emotion-cache-"] {
     border-color: var(--secondary-color) !important;
     border-bottom-color: transparent !important;
-    width: 20px !important;
-    height: 20px !important;
-    border: 2px solid var(--text-gray) !important;
-    border-radius: 50% !important;
-    animation: spin 1s linear infinite !important;
+    height: 1rem;
+    width: 1rem;
+}
 
+/* Overall score container */
+.overall-score-container {
+    padding: 1rem;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end)) !important;
+    border-radius: 8px !important;
+    margin-block: 1rem !important;
+}
+
+.overall-score-text {
+    margin: 0;
+    color: #FFFFFF !important;
+}
+
+.score-value {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 4px;
 }
 
 /* Radar chart container */
@@ -148,22 +151,13 @@ div[data-testid="stSpinner"] i[class*="st-emotion-cache-"] {
     margin-block: 0;
 }
 
-/* Processing message style */
-.processing-message {
-    color: var(--text-gray) !important;
-    margin-top: 0.5rem !important;
-    margin-bottom: 2rem !important;
-    font-style: italic !important;
-}
-
-/* Footnote style */
+/* Footer styling */
 .footnote {
+    flex-shrink: 0 !important;
     font-size: 0.8rem !important;
     color: var(--text-gray) !important;
     text-align: left !important;
-    padding: 2rem 0 1rem 0 !important;
-    margin-top: 2rem !important;
-    position: relative !important;
+    padding: 1rem 0 1rem 0 !important;
 }
 
 .footnote a {
@@ -172,18 +166,4 @@ div[data-testid="stSpinner"] i[class*="st-emotion-cache-"] {
     text-underline-offset: 4px;
     text-decoration-thickness: 4px;
 }
-
-/* Processing container and spinner */
-.processing-container {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-    margin: 1rem 0 !important;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
 """
