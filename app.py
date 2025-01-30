@@ -227,7 +227,11 @@ def main():
         # Display radar chart if available
         if hasattr(st.session_state, 'radar_chart'):
             st.markdown('<div class="radar-chart-container">', unsafe_allow_html=True)
-            st.plotly_chart(st.session_state.radar_chart, use_container_width=True)
+            st.plotly_chart(
+                st.session_state.radar_chart, 
+                use_container_width=True,
+                config={'displayModeBar': False}
+            )
             st.markdown('</div>', unsafe_allow_html=True)
     
     with st.form(FORM_NAME):
