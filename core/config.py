@@ -8,6 +8,7 @@ load_dotenv()
 
 # Image assets
 ASSETS_DIR = pathlib.Path("assets")
+ICON_PATH = ASSETS_DIR / "icon.png"
 LOGO_PATH = ASSETS_DIR / "logo.png"
 
 # Get API key from environment variables

@@ -10,7 +10,7 @@ from core.pdf_handler import save_pdf_file, get_ai_extraction, parse_ai_response
 
 st.set_page_config(
     page_title=APP_TITLE,
-    page_icon=str(LOGO_PATH),
+    page_icon=str(ICON_PATH),
 )
 
 # Apply custom CSS
